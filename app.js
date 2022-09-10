@@ -8,6 +8,7 @@ let snake = {};
 function buildInitialState() {
     gameState.snake.body = [[10,10]];
     gameState.snake.direction = [1,0];
+    gameState.score = 0;
     // append (board size) grid of cells to body
     // adjust css if the cell is occupied by snake body
     // adjust cells for each tick
@@ -23,18 +24,15 @@ function buildInitialState() {
         }
         grid.appendChild(column);
     }
-}
-
-function renderState() {
-    
-    alter_cell_tags();
     show_apple();
 }
 
+function renderState() {
+    alter_cell_tags();
+}
+
 function alter_cell_tags() {
-    if (hits_wall(gameState.snake.body[0][0], gameState.snake.body[0][1])) {
-        return false
-    }
+    
 
         let indexer = gameState.snake.body[0];
         let row_index = indexer[0];
@@ -47,7 +45,6 @@ function alter_cell_tags() {
 
 
 function show_apple() {
-    
         let indexer = gameState.apple;
         let row_index = indexer[0];
         let column_index =indexer[1];
@@ -60,21 +57,36 @@ function show_apple() {
 function tick() {
     // append the new point to start of snake.body array 
     
-    determine_size_on_tick();
+    if (!determine_size_on_tick()){
+        return false
+    };
     renderState();
+    return true
+}
+
+function detect_self_collision(col, row) {
+    for (let i = 0; i < gameState.snake.body.length; i++) {
+        if (gameState.snake.body[i][0] === col && gameState.snake.body[i][1] === row) {
+            return true
+        }
+    }
+    return false
 }
 
 
 function determine_size_on_tick() {
     let old_first = snake.body[0];
     let new_cell = [old_first[0] + snake.direction[0], old_first[1] + snake.direction[1]]
-    
+    if (detect_self_collision(new_cell[0],new_cell[1]) || hits_wall(new_cell[0], new_cell[1])) {
+        console.log("first trigger");
+        return false
+    }
     gameState.snake.body.unshift(new_cell);
     if (!eats_apple()) {
         let drop_value = gameState.snake.body.pop();
         document.getElementsByClassName("column")[drop_value[1]].getElementsByClassName("row")[drop_value[0]].className = "row cell";
     }
-    
+    return true
 }
 
 function eats_apple() {
@@ -92,9 +104,9 @@ function eats_apple() {
 
 function generate_new_apple() {
     rand_col =Math.floor(Math.random() * gameState.grid_size);
-    console.log(rand_col);
     rand_row =Math.floor(Math.random() * gameState.grid_size);
     gameState.apple = [rand_col, rand_row];
+    show_apple();
 }
 
 
@@ -102,6 +114,7 @@ let gameState = {
     apple: [3,3],
     snake: snake,
     grid_size: 20,
+    score: 0,
 }
 
 function direction_up() {
@@ -127,7 +140,6 @@ function hits_wall(column,row) {
 
 document.addEventListener("keydown", function(event) {
     if (event.code == "ArrowLeft") {
-        console.log("arrow left logged!")
         direction_left();
     }
 
@@ -144,16 +156,21 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
+
+
 function gameLoop () {
-    let id = setInterval(tick, 10000/30);
-    
-    setInterval(function () {if (hits_wall(gameState.snake.body[0][0], gameState.snake.body[0][1])) {
+    let id = setInterval(function() {
+        if (!tick() || hits_wall(gameState.snake.body[0][0], gameState.snake.body[0][1])) {
         console.log("triggered");
         console.log(gameState.snake.body[0]);
         clearInterval(id);
         return false
-    }}, 100)
+    }}, 10000/30);
+    
+    
 }
+
+
 
 buildInitialState();
 gameLoop();
