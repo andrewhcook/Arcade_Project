@@ -1,0 +1,26 @@
+body {
+    background-color: antiquewhite;
+}
+
+#game-grid {
+    display: flex;
+}
+
+cell {
+    display: block;
+    background-color: green;
+    height: 2vh;
+    width: 2vh;
+    border: 1px dashed black;
+}
+.occupied {
+    background-color: orange;
+}
+
+.apple {
+    background-color: red;
+}
+
+.cell {
+    background-color: green;
+}
