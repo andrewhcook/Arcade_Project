@@ -1,8 +1,5 @@
 const header_elem = document.querySelector("#header-element");
 
-
-
-
 let snake = {};
 
 function buildInitialState() {
@@ -98,9 +95,6 @@ function eats_apple() {
         }
     };
     return false
-
-    
- 
 }
 
 function generate_new_apple() {
@@ -164,17 +158,15 @@ function gameLoop () {
     let id = setInterval(function() {
         document.getElementById("score").innerText = gameState.score;
         document.getElementById("best").innerText = gameState.best;
+        if (gameState.score > gameState.best) {
+            gameState.best = gameState.score;
+        }
         if (!tick() || hits_wall(gameState.snake.body[0][0], gameState.snake.body[0][1])) {
         console.log("triggered");
         console.log(gameState.snake.body[0]);
         clearInterval(id);
-        if (gameState.score > gameState.best) {
-            gameState.best = gameState.score;
-        }
         return false;
-    }}, 10000/30);
-    
-    
+    }}, 10000/60);
 }
 
 
