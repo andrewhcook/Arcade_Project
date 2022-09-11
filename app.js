@@ -98,8 +98,18 @@ function eats_apple() {
 }
 
 function generate_new_apple() {
+    let apple_in_body = true;
+    while (apple_in_body) {
     rand_col =Math.floor(Math.random() * gameState.grid_size);
     rand_row =Math.floor(Math.random() * gameState.grid_size);
+    for (let i = 0;i < gameState.snake.body.length; i++) {
+        if (gameState.snake.body[i][0] === rand_col && gameState.snake.body[i][1]
+ === rand_row) {apple_in_body = true;
+break} apple_in_body = false;
+  }
+
+}
+    // check if new apple spawns in snake body. if so generate a new apple
     gameState.apple = [rand_col, rand_row];
     show_apple();
 }
