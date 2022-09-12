@@ -6,6 +6,7 @@ function buildInitialState() {
     gameState.snake.body = [[10,10]];
     gameState.snake.direction = [1,0];
     gameState.score = 0;
+    gameState.best = 0;
     // append (board size) grid of cells to body
     // adjust css if the cell is occupied by snake body
     // adjust cells for each tick
@@ -200,5 +201,5 @@ document.getElementById("new-game").addEventListener('click', refresh);
 buildInitialState();
 
 //document.getElementsByClassName("column")[gameState.grid_size].getElementsByClassName("row")[gameState.grid_size];
-gameLoop();
+//gameLoop();
 

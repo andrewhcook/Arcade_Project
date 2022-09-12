@@ -4,8 +4,15 @@ body {
 
 #game-grid {
     display: flex;
+    justify-content: center;
 }
 
+
+h1 {
+    display:flex;
+    font-family: "algerian";
+    justify-content: center;
+}
 cell {
     display: block;
     background-color: green;
@@ -23,4 +30,23 @@ cell {
 
 .cell {
     background-color: green;
+}
+
+.score-box {
+    display: flex;
+    justify-content: center;
+    font-family: "algerian";
+    
+}
+#score {
+    color: red;
+}
+
+#best {
+    color: red
+}
+
+.new-game-button {
+    display: flex;
+    justify-content: center;
 }
