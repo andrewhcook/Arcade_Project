@@ -7,6 +7,7 @@ function buildInitialState() {
     gameState.snake.direction = [1,0];
     gameState.score = 0;
     gameState.best = 0;
+    gameState.speed = 10000/60;
     // append (board size) grid of cells to body
     // adjust css if the cell is occupied by snake body
     // adjust cells for each tick
@@ -33,8 +34,8 @@ function alter_cell_tags() {
         let indexer = gameState.snake.body[0];
         let row_index = indexer[0];
         let column_index =indexer[1];
-        console.log("row", row_index);
-        console.log("column", column_index);
+       // console.log("row", row_index);
+      //  console.log("column", column_index);
         let column = document.getElementsByClassName("column")[column_index];
         let row = column.getElementsByClassName("row")[row_index];
         row.className = "row occupied"
@@ -76,7 +77,7 @@ function determine_size_on_tick() {
     let old_first = snake.body[0];
     let new_cell = [old_first[0] + snake.direction[0], old_first[1] + snake.direction[1]]
     if (detect_self_collision(new_cell[0],new_cell[1]) || hits_wall(new_cell[0], new_cell[1])) {
-        console.log("first trigger");
+      //  console.log("first trigger");
         return false
     }
     gameState.snake.body.unshift(new_cell);
@@ -173,11 +174,11 @@ function gameLoop () {
             gameState.best = gameState.score;
         }
         if (!tick() || hits_wall(gameState.snake.body[0][0], gameState.snake.body[0][1])) {
-        console.log("triggered");
-        console.log(gameState.snake.body[0]);
+       // console.log("triggered");
+      //  console.log(gameState.snake.body[0]);
         clearInterval(id);
         return false;
-    }}, 10000/60);
+    }}, gameState.speed);
 }
 
 
@@ -195,8 +196,16 @@ function refresh() {
 }
 
 document.getElementById("new-game").addEventListener('click', refresh);
-
-
+document.getElementById("selector").addEventListener("change", function(event) {
+    //console.log(event.target.value);
+    if (event.target.value === "Hard") {
+        gameState.speed = 10000/120;
+    } else if (event.target.value === "Easier") {
+        gameState.speed = 10000/30;
+    } else if (event.target.value === "Standard")  {
+        gameState.speed = 10000/45
+    }
+})
 
 buildInitialState();
 

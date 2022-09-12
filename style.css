@@ -16,8 +16,8 @@ h1 {
 cell {
     display: block;
     background-color: green;
-    height: 2vh;
-    width: 2vh;
+    height: 3.5vh;
+    width: 3.5vh;
     border: 1px dashed black;
 }
 .occupied {
@@ -36,6 +36,7 @@ cell {
     display: flex;
     justify-content: center;
     font-family: "algerian";
+    font-size: 25px;
     
 }
 #score {
@@ -49,4 +50,33 @@ cell {
 .new-game-button {
     display: flex;
     justify-content: center;
+    
+}
+
+select {
+    margin: 2px;
+    font-size: 25px;
+}
+
+#new-game {
+    font-size: 25px;
+}
+
+#difficulty-bar {
+    font-size: 25px;
+}
+
+@media screen and (max-width: 600px) {
+    #game-grid {
+        justify-content: left;
+    }
+    .score-box {
+        justify-content: left;
+    }
+    h1 {
+        justify-content: left;
+    }
+    .new-game-button {
+        justify-content: left;
+    }
 }
