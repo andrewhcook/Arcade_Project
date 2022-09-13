@@ -203,7 +203,7 @@ document.getElementById("selector").addEventListener("change", function(event) {
     } else if (event.target.value === "Easier") {
         gameState.speed = 10000/30;
     } else if (event.target.value === "Standard")  {
-        gameState.speed = 10000/45
+        gameState.speed = 10000/50
     }
 })
 
