@@ -28,6 +28,7 @@ function buildInitialState() {
     show_apple();
 }
 
+// this function could easily contain multiple function calls in the future if the need came about. Right now it just calls the only relevent render function
 function renderState() {
     alter_cell_tags();
 }
@@ -106,6 +107,7 @@ function generate_new_apple() {
     while (apple_in_body) {
     rand_col =Math.floor(Math.random() * gameState.grid_size);
     rand_row =Math.floor(Math.random() * gameState.grid_size);
+     // check if new apple spawns in snake body. if so generate a new apple
     for (let i = 0;i < gameState.snake.body.length; i++) {
         if (gameState.snake.body[i][0] === rand_col && gameState.snake.body[i][1]
  === rand_row) {apple_in_body = true;
@@ -113,7 +115,7 @@ break} apple_in_body = false;
   }
 
 }
-    // check if new apple spawns in snake body. if so generate a new apple
+   
     gameState.apple = [rand_col, rand_row];
     show_apple();
 }
@@ -211,6 +213,6 @@ document.getElementById("selector").addEventListener("change", function(event) {
 
 buildInitialState();
 
-//document.getElementsByClassName("column")[gameState.grid_size].getElementsByClassName("row")[gameState.grid_size];
+
 //gameLoop();
 
