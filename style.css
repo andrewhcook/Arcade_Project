@@ -16,8 +16,8 @@ h1 {
 cell {
     display: block;
     background-color: green;
-    height: 3.5vh;
-    width: 3.5vh;
+    height:2.25em;
+    width: 2.25em;
     border: 1px dashed black;
 }
 .occupied {
@@ -78,5 +78,19 @@ select {
     }
     .new-game-button {
         justify-content: left;
+    }
+}
+
+@media screen and (max-height: 700px) {
+    cell {
+        height: 2vh;
+        width: 2vh;
+    }
+}
+
+@media  screen and (min-height: 700px) {
+    cell {
+        height: 1.25em;
+        width: 1.25em;
     }
 }

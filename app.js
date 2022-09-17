@@ -14,6 +14,8 @@ function buildInitialState() {
     let grid = document.querySelector("#game-grid");
    // console.log(grid);
     for (let j = 0; j < gameState.grid_size; j++) {
+        // change to table element or divs
+        // take a look at semantic elements
         let column = document.createElement("column");
         column.className = "column";
         for (let i = 0; i < gameState.grid_size; i++) {
